@@ -29,7 +29,7 @@
       ...mapActions(['addTodo']),
       onSubmit(e) {
         e.preventDefault()
-        this.addTodo({title:this.title})
+        this.addTodo({title:this.title, completed: false})
         this.title = ''
       }
     }

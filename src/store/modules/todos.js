@@ -23,14 +23,15 @@ export default {
       const res = await axios.get(`/todos`)
       commit('setTodos', res.data)
     },
-    async addTodo({commit}, payload) {
+    async addTodo({commit, rootState}, payload) {
       const res = await axios.post(`/todos`, payload)
-      commit('pushTodo', res.data)
+      const data = res.data
+      data.id = rootState.todos.todos.length + 1
+      commit('pushTodo', data)
     },
     async updatingTodo({commit}, updTodo) {
       const res = await axios.put(`/todos/${updTodo.id}`, updTodo)
       commit('updateTodo', res.data)
-      console.log(res.data)
     },
     async deleteTodo({commit}, id) {
       await axios.delete(`/todos/${id}`)
